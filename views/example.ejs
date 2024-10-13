@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Prueba</title>
+</head>
+<body>
+	<div class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: space-evenly; height: 100vh;">
+		<div class="login" style="display: flex; justify-content: center; align-items: center; width: 100%;">
+			<form method="post" style="display: flex; flex-direction: column; gap: 20px; width: 40%;">
+				<label for="name">username</label>
+				<input type="text" name="username" id="name">
+				<label for="password">password</label>
+				<input type="password" name="password" id="password">
+				<input type="submit" value="Login" id="login">
+			</form>
+		</div>
+	
+		<div class="register" style="display: flex; justify-content: center; align-items: center; width: 100%;">
+			<form style="display: flex; flex-direction: column; gap: 20px; width: 40%;">
+				<label for="nameRegister">username</label>
+				<input type="text" name="username" id="nameRegister">
+				<label for="passwordRegister">password</label>
+				<input type="password" name="password" id="passwordRegister">
+				<input type="submit" value="Register" id="register">
+			</form>
+		</div>
+	</div>
+
+	<script>
+		const login = document.getElementById("login");
+		const register = document.getElementById("register");
+		login.addEventListener('click', (evt) => {
+			evt.preventDefault()
+			
+			const username = document.getElementById('name').value
+			const password = document.getElementById('password').value
+			fetch('http://localhost:3000/login', {
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({username, password}),
+			}).then(res => {
+				if(res.status === 200){
+					location.href = "http://localhost:3000/protected"
+				}
+			})
+		})
+		register.addEventListener('click', (evt) => {
+			evt.preventDefault()
+			
+			const username = document.getElementById('nameRegister').value
+			const password = document.getElementById('passwordRegister').value
+			fetch('http://localhost:3000/register', {
+				method: 'post',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({username, password}),
+			}).then(res => {
+				if(res.status === 200){
+					location.href = "http://localhost:3000/"
+				}
+			})
+		})
+	</script>
+</body>	
+</html>

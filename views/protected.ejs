@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Prueba</title>
+</head>
+<body>
+	<h1>Hola <%= username %>!</h1>
+	<h2>Este contenido está protegida</h2>
+	<button onclick="logout()">Salir Sesion</button>
+	<script>
+		function logout() {
+			fetch("http://localhost:3000/logout", {
+				method: 'post'
+			}).then(res => {
+				if(res.status === 200 ){
+					location.href = 'http://localhost:3000/'
+				}
+			})
+			
+		}
+	</script>
+</body>
+</html>
